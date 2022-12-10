@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>类式组件</title>
 </head>
 <body>
     <!-- 准备好容器 -->
@@ -14,7 +14,6 @@
 <!-- 引入依赖 ,引入的时候，必须就按照这个步骤-->
 <script src="../React-js/react.development.js" type="text/javascript"></script>
 <script src="../React-js/react-dom.development.js" type="text/javascript"></script>
-
 <script src="../React-js/babel.min.js" type="text/javascript"></script>
 
 
@@ -25,26 +24,21 @@
             render(){
                 //render是放在原型对象上的，供实例对象使用
                 //render的this，MyComponent的实例对象【组件实例对象】
-                return <h1>这个是类组件</h1>
+                console.log('render中的this：',this)
+                return <h1>这个是类式组件</h1>
             }
         }
         
         //2.渲染组件
-        ReactDOM.render(<MyComponent />,document.getElementById("test"))
-
-       
+        ReactDOM.render(<MyComponent/>,document.getElementById("test"))
 
        //执行过程：
        //1.React解析组件标签，找到相应的组件
-       //2.发现组件是类定义的，随后new出来的类的实例，并通过该实例调用到原型上的render方法
+       //2.发现组件是类定义的，随后new出来该类的实例，并通过该实例调用到原型上的render方法
        //3.将render返回的虚拟DOM转化为真实的DOM,随后呈现在页面中
 
-
        //复杂组件：有状态的
-       //简单组件：没有状态的
-       //组件的状态里面保存着数据 state
+       //简单组件：没有状态的，例如函数式组件
 </script>
-
-
 
 </html>

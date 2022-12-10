@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>受控组件</title>
 </head>
 <body>
     <div id = "div">
@@ -21,20 +21,11 @@
 <script src="../React-js/prop-types.js"></script>
 
 <script type="text/babel">
-
-/*
-    受控制组件，就是使用事件和statem,输入类的组件，就是将内容绑定到state中的，在使用的时候使用state里面的   
-*/
-
+    
     class Login extends React.Component{
 
-        state = {name:"",pwd:""};
-
-       /* login = (event) =>{
-            event.preventDefault(); //阻止表单提交
-            console.log(this.name.value);
-            console.log(this.pwd.value);
-        }*/
+        //初始化状态
+        state = {name:'',pwd:''}
 
         saveName = (event) =>{
             this.setState({name:event.target.value});
@@ -43,7 +34,13 @@
         savePwd = (event) => {
             this.setState({pwd:event.target.value});
         }
-
+        
+		//表单提交的回调
+		login = (event)=>{
+			event.preventDefault() //阻止表单提交
+			const {name,pwd} = this.state
+			alert(`你输入的用户名是：${name},你输入的密码是：${pwd}`)
+		}
         render() {
             return (
                 <form action="http://www.baidu.com" onSubmit={this.login}>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>state</title>
     
 </head>
 <body>
@@ -15,40 +15,45 @@
 <!-- 引入依赖 ,引入的时候，必须就按照这个步骤-->
 <script src="../React-js/react.development.js" type="text/javascript"></script>
 <script src="../React-js/react-dom.development.js" type="text/javascript"></script>
-
 <script src="../React-js/babel.min.js"></script>
 <!--这里使用了js来创建虚拟DOM-->
 <script type="text/babel">
         //1.创建组件
-        class St extends React.Component{
+        class Weather extends React.Component{
+            //构造器调用几次？ ———— 1次
             constructor(props){
                 super(props);
-                this.state = {isHot:true,win:"ss"};
-                //找到原型的dem，根据dem函数创建了一个dem1的函数，并且将实例对象的this赋值过去
-                // this.dem1 = this.dem.bind(this);
+                //初始化状态
+                this.state = {isHot:true,win:"大风"};
+                //找到原型的changeWeather，根据changeWeather函数创建了一个changeWeather属性，并且将实例对象的this赋值过去
+                this.changeWeather = this.changeWeather.bind(this);
             }
-            //render会调用1+n次【1就是初始化的时候调用的，n就是每一次修改state的时候调用的】
-            render(){ //这个This也是实例对象
-                //如果加dem()，就是将函数的回调值放入这个地方
-                //this.dem这里面加入this，并不是调用，只不过是找到了dem这个函数，在调用的时候相当于直接调用，并不是实例对象的调用
-                return <h1 onClick = {this.dem}>今天天气很{this.state.isHot?"炎热":"凉爽"}</h1>    
+            //render调用几次？ ———— 1+n次 (1就是初始化的时候调用的，n就是每一次修改state的时候调用的)
+            render(){ //这个This也是组件实例对象
+                //如果加changeWeather()，就是将函数的回调值放入这个地方
+                //this.changeWeather这里面加入this，并不是调用，只不过是找到了changeWeather这个函数，在调用的时候相当于直接调用，并不是实例对象的调用
+                return <h1 onClick = {this.changeWeather}>今天天气很{this.state.isHot?"炎热":"凉爽"}</h1>    
             }
-            //通过state的实例调用dem的时候，this就是实力对象
-            //类中的方法默认开启了严格模式，所以this是undefined
-            dem = () =>{
+            //changeWeather调用几次？ ————点击几次（onClick）调用几次
+            //通过state的实例调用changeWeather的时候，this就是实例对象
+            changeWeather = () =>{
                 const state =  this.state.isHot;
-                 //状态中的属性不能直接进行更改，需要借助API
+                 //状态中的属性不能直接进行更改，需要借助内置API
                 // this.state.isHot = !isHot; 错误
-                //必须使用setState对其进行修改，并且这是一个合并
+                //必须使用setState对其进行修改，并且这是一个合并更新，非替换更新
                 this.setState({isHot:!state});
             }
+            /*
+            changeWeather(){
+                //changeWeather放在哪里？ ————Weather的原型对象上，供实例调用
+                //由于changeWeather是作为onClick的回调，所以不是通过实例调用的，属于直接调用
+                //类中的方法默认开启了局部的严格模式，所以changeWeather中的this为undefined
+                console.log(this);
+            }
+            */
         }
         // 2.渲染，如果有多个渲染同一个容器，后面的会将前面的覆盖掉
-        ReactDOM.render(<St />,document.getElementById("test"));
-        
-        // document.getElementById("title").addEventListener("click",()=>{
-        //     alert("4");
-        // })
+        ReactDOM.render(<Weather />,document.getElementById("test"));
        
         
 </script>

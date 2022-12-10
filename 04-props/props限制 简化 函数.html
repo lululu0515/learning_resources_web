@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>函数式组件使用props</title>
 </head>
 <body>
     <div id = "div">
@@ -21,7 +21,6 @@
 <script src="../React-js/prop-types.js"></script>
 
 <script type="text/babel">
-
     
     function Person(props){
           return (
@@ -32,18 +31,17 @@
                 </ul>
             )
     }
-    
-   
-    
-    //在js中可以使用{...p}来复制一个对象，但是这个地方并不是复制对象，而是babel+react通过展开运算符，展开了一个对象
-    //但是只能在标签中进行使用
-    //const p = {name:"张三",age:"18",sex:"女"}   {14}就代表的是数值
-    ReactDOM.render(<Person name="sss" age = {14} speak="8"/>,document.getElementById("div"));
-    //ReactDOM.render(<Person {...p}/>,document.getElementById("div"));
 
-    function speak(){
-        console.log("这个是一个函数")
-    }
+    Person.propTypes = {
+            name:PropTypes.string.isRequired,
+            sex:PropTypes.string
+        }
+    Person.defaultProps = {
+            sex:"男",
+            age:18
+        }   
+
+    ReactDOM.render(<Person name="tom" age = {14} sex="男"/>,document.getElementById("div"));
 
 </script>
 </html>

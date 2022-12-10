@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>state简化</title>
     
 </head>
 <body>
@@ -15,7 +15,6 @@
 <!-- 引入依赖 ,引入的时候，必须就按照这个步骤-->
 <script src="../React-js/react.development.js" type="text/javascript"></script>
 <script src="../React-js/react-dom.development.js" type="text/javascript"></script>
-
 <script src="../React-js/babel.min.js"></script>
 <!--这里使用了js来创建虚拟DOM-->
 <script type="text/babel">
@@ -24,9 +23,10 @@
             //可以直接对其进行赋值
             state = {isHot:true};
             render(){ //这个This也是实例对象
-                return <h1 onClick = {()=>this.dem()}>今天天气很{this.state.isHot?"炎热":"凉爽"}</h1>    
+                // return <h1 onClick = {()=>this.dem()}>今天天气很{this.state.isHot?"炎热":"凉爽"}</h1>
+                return <h1 onClick = {this.dem}>今天天气很{this.state.isHot?"炎热":"凉爽"}</h1>    
             }
-            //箭头函数 [自定义方法--->要用赋值语句的形式+箭头函数]
+            //箭头函数 [自定义方法---要用赋值语句的形式+箭头函数形式]
             dem = ()=>{
                 console.log(this);
                 const state =  this.state.isHot;
@@ -34,9 +34,6 @@
             }
         }
         ReactDOM.render(<St />,document.getElementById("test"));
-    
-        
-       
         
 </script>
 
